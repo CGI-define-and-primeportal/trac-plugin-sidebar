@@ -36,6 +36,7 @@ class SidebarSystem(Component):
         transformers = []
         stream = stream | Transformer("//div[@id='wikipage']").prepend(tag.div(class_="sidebar"))
         for box in self.sidebar_boxes:
-            transformers.append(Transformer("//div[@class='sidebar']").prepend(box.get_box()))
+            box_detail = box.get_box(req)
+            if box_detail:
+                transformers.append(Transformer("//div[@class='sidebar']").prepend(box_detail))
         return stream.filter(*transformers)
-
