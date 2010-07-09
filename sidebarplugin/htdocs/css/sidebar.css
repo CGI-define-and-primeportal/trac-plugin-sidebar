@@ -1,0 +1,26 @@
+div.sidebar {
+  float: right;
+  margin: 0 0 2em 1em;
+  margin-right: 0;
+  padding: 0.5em 1em;
+  border: 1px solid #D7D7D7;
+  font-size: 85%;
+  background: #F7F7F0;
+}
+div.sidebar h4 {
+  margin: 0 0 .5ex 0;
+}
+div.sidebar ul {
+  list-style: none;
+  margin: 0 0 1ex 0;
+  padding: 0;
+}
+div.sidebar li {
+  margin: 0;
+  padding: 0;
+}
+div.sidebar li .description {
+  font-size: 82.35%; /* -> 70% of original size */
+  font-style: italic;
+  margin-left: 1em;
+}
