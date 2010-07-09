@@ -42,7 +42,7 @@ class UserTicketsBox(Component):
         recent_ul = tag.ul()
         cursor.execute("""SELECT ticket_change.time, ticket.id, ticket_change.author
                           FROM ticket_change, ticket
-                          WHERE ticket.id=ticket_change.ticket AND ticket.owner= %s
+                          WHERE ticket.id=ticket_change.ticket AND ticket.owner = %s
                           ORDER BY ticket_change.time
                           LIMIT 5""", (req.authname,))
         ts = TicketSystem(self.env)        
