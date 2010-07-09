@@ -6,6 +6,7 @@ div.sidebar {
   border: 1px solid #D7D7D7;
   font-size: 85%;
   background: #F7F7F0;
+  width: 15%;
 }
 div.sidebar h4 {
   margin: 0 0 .5ex 0;
