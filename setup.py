@@ -44,8 +44,8 @@ setup(
     ],
     entry_points = {
         'trac.plugins': [
-            'sidebarplugin = sidebarplugin',
-
+            'sidebarplugin.sidebar = sidebarplugin.sidebar',
+            'sidebarplugin.userticketsbox = sidebarplugin.userticketsbox',
         ]    
     }
 )
