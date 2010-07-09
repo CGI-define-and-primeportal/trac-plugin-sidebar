@@ -38,18 +38,4 @@ class SidebarSystem(Component):
         for box in self.sidebar_boxes:
             transformers.append(Transformer("//div[@class='sidebar']").prepend(box.get_box()))
         return stream.filter(*transformers)
-        
-    
-##class ProjectMembers(Component):
-##    """FIXME"""
-##    implements(ISidebarBoxProvider)
-##
-##    # ISidebarBoxProvider
-##    def get_box(self):
-##        return tag.table(tag.thead("Users"),
-##                         tag.tbody(tag.tr(tag.td("Mikael")
-##                                          )
-##                                   )
-##                         )
-
 
