@@ -43,7 +43,7 @@ class UserTicketsBox(Component):
         cursor.execute("""SELECT ticket_change.time, ticket.id, ticket_change.author
                           FROM ticket_change, ticket
                           WHERE ticket.id=ticket_change.ticket AND ticket.owner = %s
-                          ORDER BY ticket_change.time
+                          ORDER BY ticket_change.time DESC
                           LIMIT 5""", (req.authname,))
         ts = TicketSystem(self.env)        
         for time, ticket, author in cursor:
