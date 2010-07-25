@@ -40,13 +40,14 @@ class UserTicketsBox(Component):
             counts_ul.append(tag.li("State ", link, ": ", count))
 
         recent_ul = tag.ul()
-        cursor.execute("""SELECT ticket_change.time, ticket.id, ticket_change.author
-                          FROM ticket_change, ticket
-                          WHERE ticket.id=ticket_change.ticket AND ticket.owner = %s
-                          ORDER BY ticket_change.time DESC
+        cursor.execute("""SELECT changetime, id
+                          FROM ticket
+                          WHERE ticket.owner = %s
+                          GROUP BY id
+                          ORDER BY changetime DESC
                           LIMIT 5""", (req.authname,))
         ts = TicketSystem(self.env)        
-        for time, ticket, author in cursor:
+        for time, ticket in cursor:
             resource = Resource('ticket',ticket)
             compact = ts.get_resource_description(resource, 'compact')
             summary = ts.get_resource_description(resource, 'summary')
