@@ -55,5 +55,5 @@ class UserTicketsBox(Component):
             recent_ul.append(tag.li(link))
        
 
-        return tag.div(tag.h4("Your Ticket Counts"), counts_ul,
-                       tag.h4("Your Recently Modified Tickets"), recent_ul)
+        return tag.div(tag.div(tag.h4("Your Ticket Counts"), counts_ul, class_='ticketbox'),
+                       tag.div(tag.h4("Your Recently Modified Tickets"), recent_ul, class_='ticketbox'))
