@@ -49,10 +49,11 @@ class UserTicketsBox(Component):
         ts = TicketSystem(self.env)        
         for ticket,  in cursor:
             resource = Resource('ticket', ticket)
-            compact = ts.get_resource_description(resource, 'compact')
-            summary = ts.get_resource_description(resource, 'summary')
-            link = tag.a(compact, " ", summary, href=req.href.ticket(ticket))
-            recent_ul.append(tag.li(link))
+            if "TICKET_VIEW" in req.perm(resource):
+                compact = ts.get_resource_description(resource, 'compact')
+                summary = ts.get_resource_description(resource, 'summary')
+                link = tag.a(compact, " ", summary, href=req.href.ticket(ticket))
+                recent_ul.append(tag.li(link))
        
 
         return tag.div(tag.div(tag.h4("Your Ticket Counts"), counts_ul, class_='ticketbox'),
