@@ -44,15 +44,21 @@ class UserTicketsBox(Component):
                           FROM ticket
                           WHERE ticket.owner = %s
                           GROUP BY id
-                          ORDER BY max(changetime) DESC
-                          LIMIT 5""", (req.authname,))
-        ts = TicketSystem(self.env)        
+                          ORDER BY max(changetime) DESC""", 
+                       (req.authname,))
+        
+        shown_count = 0
+        ts = TicketSystem(self.env)
         for ticket,  in cursor:
             resource = Resource('ticket', ticket)
-            compact = ts.get_resource_description(resource, 'compact')
-            summary = ts.get_resource_description(resource, 'summary')
-            link = tag.a(compact, " ", summary, href=req.href.ticket(ticket))
-            recent_ul.append(tag.li(link))
+            if "TICKET_VIEW" in req.perm(resource):
+                shown_count = shown_count + 1
+                if shown_count > 5:
+                    break
+                compact = ts.get_resource_description(resource, 'compact')
+                summary = ts.get_resource_description(resource, 'summary')
+                link = tag.a(compact, " ", summary, href=req.href.ticket(ticket))
+                recent_ul.append(tag.li(link))
        
 
         return tag.div(tag.div(tag.h4("Your Ticket Counts"), counts_ul, class_='ticketbox'),
