@@ -28,15 +28,16 @@ class SidebarSystem(Component):
 
     # ITemplateStreamFilter
     def filter_stream(self, req, method, filename, stream, data):
+        sidebar_class = "sidebar span3"
         if not filename == "wiki_view.html":
             return stream
         if not data['page'].name == "WikiStart":
             return stream
-        add_stylesheet(req, "sidebar/css/sidebar.css")
+        #add_stylesheet(req, "sidebar/css/sidebar.css")
         transformers = []
-        stream = stream | Transformer("//div[@id='wikipage']").prepend(tag.div(class_="sidebar"))
+        stream = stream | Transformer("//div[@id='wiki-page-inside']").attr("class", "span9").after(tag.div(class_=sidebar_class))
         for box in self.sidebar_boxes:
             box_detail = box.get_box(req)
             if box_detail:
-                transformers.append(Transformer("//div[@class='sidebar']").prepend(box_detail))
+                transformers.append(Transformer("//div[@class='" + sidebar_class + "']").prepend(box_detail))
         return stream.filter(*transformers)

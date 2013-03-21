@@ -33,11 +33,21 @@ class UserTicketsBox(Component):
         cursor.execute("""SELECT status, COUNT(status)
                           FROM ticket
                           WHERE owner = %s
-                          GROUP BY status""", (req.authname,))
+                          GROUP BY status
+                          ORDER BY 
+                            CASE WHEN status = 'assigned'
+                              THEN 1
+                              ELSE 0
+                            END DESC,
+                            CASE WHEN status = 'closed'
+                              THEN 1
+                              ELSE 0
+                            END ASC,
+                            status ASC""", (req.authname,))
         for status, count in cursor:
-            link = tag.a(status,href=req.href.query(owner=req.authname,
-                                                    status=status))
-            counts_ul.append(tag.li("State ", link, ": ", count))
+            link = tag(tag.span(class_="ticket-state-" + status), tag.a(status,href=req.href.query(owner=req.authname,
+                                                    status=status)))
+            counts_ul.append(tag.li(link, ": ", count))
 
         recent_ul = tag.ul()
         cursor.execute("""SELECT id
@@ -57,9 +67,9 @@ class UserTicketsBox(Component):
                     break
                 compact = ts.get_resource_description(resource, 'compact')
                 summary = ts.get_resource_description(resource, 'summary')
-                link = tag.a(compact, " ", summary, href=req.href.ticket(ticket))
+                link = tag.a(tag.strong(compact), " ", tag.span(summary, class_="capitalize"), href=req.href.ticket(ticket))
                 recent_ul.append(tag.li(link))
        
 
-        return tag.div(tag.div(tag.h4("Your Ticket Counts"), counts_ul, class_='ticketbox'),
-                       tag.div(tag.h4("Your Recently Modified Tickets"), recent_ul, class_='ticketbox'))
+        return tag.div(tag.div(tag.h3(tag.i(class_="icon-trophy"), " Your Ticket Counts"), counts_ul, class_='box-primary color-none', id="sidebar-count"),
+                       tag.div(tag.h3(tag.i(class_="icon-star"), " Your Recently Modified Tickets"), recent_ul, class_='box-primary color-none', id="sidebar-recent"))
