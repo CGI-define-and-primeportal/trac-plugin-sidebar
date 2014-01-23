@@ -49,6 +49,7 @@ class UserTicketsBox(Component):
                                                     status=status)))
             counts_ul.append(tag.li(link, ": ", count))
 
+
         recent_ul = tag.ul()
         cursor.execute("""SELECT id
                           FROM ticket
@@ -71,5 +72,4 @@ class UserTicketsBox(Component):
                 recent_ul.append(tag.li(link))
        
 
-        return tag.div(tag.div(tag.h3(tag.i(class_="icon-ticket"), " Your Ticket Counts"), counts_ul, class_='box-primary color-none', id="sidebar-count"),
-                       tag.div(tag.h3(tag.i(class_="icon-star"), " Your Recently Modified Tickets"), recent_ul, class_='box-primary color-none', id="sidebar-recent"))
+        return tag.div(tag.div(tag.h3(tag.i(class_="icon-ticket"), " Your Ticket Counts"), counts_ul, class_='box-sidebar color-none', id="sidebar-count"))
