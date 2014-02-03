@@ -45,7 +45,7 @@ class UserTicketsBox(Component):
                             END ASC,
                             status ASC""", (req.authname,))
         for status, count in cursor:
-            link = tag(tag.span(class_="ticket-state-" + status), tag.a(status,href=req.href.query(owner=req.authname,
+            link = tag(tag.span(class_="ticket-state state-" + status), tag.a(status,href=req.href.query(owner=req.authname,
                                                     status=status)))
             counts_ul.append(tag.li(link, ": ", count))
 
