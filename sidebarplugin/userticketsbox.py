@@ -72,7 +72,7 @@ class UserTicketsBox(Component):
                 recent_ul.append(tag.li(link))
        
 
-        return tag.div(
+        return tag(
           tag.div(
             tag.h3(
               tag.i(
