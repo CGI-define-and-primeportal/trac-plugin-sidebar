@@ -76,7 +76,7 @@ class UserTicketsBox(Component):
           tag.div(
             tag.h3(
               tag.i(
-                class_="icon-ticket"
+                class_="fa fa-ticket"
               ),
             " Your Ticket Counts"
             ),
@@ -85,7 +85,7 @@ class UserTicketsBox(Component):
           tag.div(
             tag.h3(
               tag.i(
-                class_="icon-star"
+                class_="fa fa-star"
               ),
             " Your Recently Modified Tickets"
             ),
