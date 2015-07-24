@@ -68,7 +68,7 @@ class UserTicketsBox(Component):
                     break
                 compact = ts.get_resource_description(resource, 'compact')
                 summary = ts.get_resource_description(resource, 'summary')
-                link = tag.a(tag.strong(compact), " ", tag.span(summary, class_="capitalize"), href=req.href.ticket(ticket))
+                link = tag.a(tag.strong(compact), " ", tag.span(summary), href=req.href.ticket(ticket))
                 recent_ul.append(tag.li(link))
        
 
