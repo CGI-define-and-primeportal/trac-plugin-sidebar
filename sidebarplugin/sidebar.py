@@ -1,5 +1,5 @@
-from trac.core import Component, implements, TracError
-from trac.web.chrome import add_stylesheet, ITemplateProvider
+from trac.core import Component, implements
+from trac.web.chrome import ITemplateProvider
 from trac.web.api import ITemplateStreamFilter
 from genshi.builder import tag
 from genshi.filters.transform import Transformer
