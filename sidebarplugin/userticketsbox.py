@@ -6,7 +6,7 @@
 # Author: Nick Piper <nick.piper@logica.com>
 
 from genshi.builder import tag
-from trac.core import Component, implements
+from trac.core import Component, implements, TracError, ExtensionPoint
 from trac.ticket.api import TicketSystem
 from trac.resource import Resource
 from sidebarplugin.api import ISidebarBoxProvider
